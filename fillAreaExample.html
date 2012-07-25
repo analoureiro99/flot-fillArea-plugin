@@ -1,0 +1,65 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Flot FillArea Example</title>
+        <script language="javascript" type="text/javascript" src="anexos/jquery.js"></script>
+        <script language="javascript" type="text/javascript" src="anexos/jquery.flot.js"></script>
+        <script language="javascript" type="text/javascript" src="anexos/jquery.flot.fillarea.js"></script>
+    </head>
+    <body>
+        <h1>Flot Examples</h1>
+
+        <div id="placeholder" style="width:600px;height:400px;"></div>
+
+        <script type="text/javascript">
+            $(function () {
+                var points = [[2, 91.9], [3, 98.5], [4, 107.1], [5, 114.4], [6, 120.6], [7, 124.7], [8, 131.1], [9, 136.8], [10, 142.3], [11, 150.0], [12, 154.7], [13, 161.9], [14, 168.7], [15, 173.6], [16, 175.9], [17, 176.6], [18, 176.8], [19, 176.7]];
+                
+                var areaconf = [{ representation:"symmetric"},{representation:"asymmetric"}];
+                var areaconf2 = [{ representation:"symmetric"},{representation:"asymmetric"}];
+                
+                var mydata = [];
+                var mydata2 = [];
+                
+                for(var i = 0; i< points.length; i++) {
+                    var x = points[i][0];
+                    var y = points[i][1];
+             
+                    var stddev = 5.5;
+                    var min = y- 10.0;
+                    var max = y+ 10.0;
+                    mydata.push([x,y,stddev, min, max]);
+                }
+             
+                for(var i = 0; i< points.length; i++) {
+                    var x = points[i][0];
+                    var y = points[i][1]+30;
+             
+                    var stddev = 3.5;
+                    var min = y - (3.5 + 10.0 * Math.random());
+                    var max = y + (3.5 + 10.0 * Math.random()); 
+                    mydata2.push([x,y,stddev, min, max]);
+                }
+             
+                var dataset = [        
+                    {data:mydata, fillArea:areaconf, lines: { show: true, lineWidth: 2, fill: false}, color:"brown", opacity:1, label:"Line"},
+                  {data:mydata2, fillArea:areaconf2, lines: { show: true, lineWidth: 2, fill: false, steps:true}, color:"blue", opacity:1, label:"Steps"}
+                ]
+
+                $.plot($("#placeholder"), dataset, {
+                    xaxis: { tickDecimals: 0 },
+                    yaxis: { tickFormatter: function (v) { return v + " cm"; } },
+                    legend: { position: 'se' }
+                });
+                
+            });
+        </script>
+
+    </body>
+</html>
+
