@@ -268,8 +268,7 @@ Example:
       
         // adapted from "jquery.flot" 
         function plotLineArea(points, axisx, axisy, ctx, ps, yLow, yUp, color, opacity) {
-            var bottom = Math.min(Math.max(0, axisy.min), axisy.max),
-            i = 0, top, areaOpen = false,
+            var i = 0, areaOpen = false,
             ypos = yUp, segmentStart = 0, segmentEnd = 0;
             
             ctx.fillStyle = color;
@@ -310,7 +309,7 @@ Example:
                     }
                 }
 
-                if (x1 === null || x2 === null)
+                if (x1 == null || x2 == null)
                     continue;
 
                 // clip x values
@@ -346,7 +345,7 @@ Example:
                 if (!areaOpen) {
                     // open area
                     ctx.beginPath();
-                    ctx.moveTo(axisx.p2c(x1), axisy.p2c(bottom));
+                    ctx.moveTo(axisx.p2c(x1), axisy.p2c(y1));
                     areaOpen = true;
                 }
                     
